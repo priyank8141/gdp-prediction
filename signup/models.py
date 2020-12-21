@@ -1,4 +1,6 @@
+
 from django.db import models
+
 
 # Create your models here.
 class user(models.Model):
@@ -12,6 +14,7 @@ class user(models.Model):
     state = models.CharField(max_length=100)
     district = models.CharField(max_length=100)
     password = models.CharField(max_length=150)
+
 
 
 
