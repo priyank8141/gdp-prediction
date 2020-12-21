@@ -1,0 +1,165 @@
+/*nav bar*/
+.h5-nav{
+    color:white;
+}
+.h5-nav:hover{
+    color: white;
+}
+
+/*home view*/
+.home{
+    padding-top:250px;
+    padding-bottom:60px;
+    background-size: cover;
+}
+.home1{
+    color:green;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:larger;
+    padding-left:30px;
+    padding-top:100px;
+}
+.home2{
+    padding-left:30px ;
+}
+
+.about{
+    padding-top:50px;
+    padding-bottom:50px;
+    background-color:#76f774;
+}
+
+.services{
+    padding-top:50px;
+    padding-bottom:50px;
+    background-color: indigo;
+    color: white;
+}
+
+.services1{
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:25px;
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+
+.caption {
+    display: block;
+}
+.contact{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+/*login*/
+.login{
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    align-content: center;
+    padding-top: 150px;
+    padding-bottom:120px;
+}
+
+.login-card{
+    height: 370px;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span{
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+}
+
+.social_icon span:hover{
+    color: white;
+    cursor: pointer;
+}
+
+.login-card-header h3{
+    color: white;
+}
+
+.social_icon{
+    position: absolute;
+    right: 20px;
+    top: -45px;
+}
+
+.input-group-prepend span{
+    width: 50px;
+    background-color: #FFC312;
+    color: black;
+    border:0 !important;
+}
+
+input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember{
+    color: white;
+}
+
+.remember input{
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.login_btn{
+    color: black;
+    background-color: white;
+    width: 100px;
+}
+
+.login_btn:hover{
+    background-color: white;
+    }
+
+.links{
+    color: white;
+}
+
+.links a{
+    margin-left: 4px;
+    }
+
+/*signup*/
+
+.signup{
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    height: 100%;
+    align-content: center;
+    padding-top: 160px;
+    padding-bottom: 130px;
+    }
+
+.signup-card{
+
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0,0,0,0.5) !important;
+    }
+
+.signup-card-header h3{
+    color: white;
+    }
