@@ -26,4 +26,5 @@ urlpatterns = [
     path('signup/', include('signup.urls')),
     path('farmerlog/', include('farmer.urls')),
     path('sarpanchlog/', include('sarpanch.urls')),
+    path('organizationlog/', include('organization.urls')),
 ]
