@@ -1,6 +1,7 @@
 import psycopg2
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from signup.models import user
+from django.urls import reverse
 # Create your views here.
 def show_login(request):
     print("this is login page")
@@ -19,13 +20,18 @@ def logproess(request):
             cursor.execute(Query, (email,))
             records = cursor.fetchall()
             print(records)
-            # print(records[0][0])
+            id=records[0][0]
             if records[0][10] == password:
                 print("success login")
-                response = redirect('/redirectfarmer/')
-                return response
-                # return render(request, "successlogin.html")
-
+                if records[0][10] == 'farmer':
+                    print("farmer")
+                    return HttpResponseRedirect(reverse("farmerlog", args=(id,)))
+                elif records[0][10] == 'sarpanch':
+                    print("sarpanch")
+                    return HttpResponseRedirect(reverse("sarpanchlog", args=(id,)))
+                elif records[0][10] == 'organization':
+                    print("organization")
+                    return HttpResponseRedirect(reverse("organizationlog", args=(id,)))
             else:
                 context = {
                 'message': 'invalid password and username'

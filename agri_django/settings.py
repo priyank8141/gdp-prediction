@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'home',
     'login',
     'signup',
+    'farmer',
+    'sarpanch',
 ]
 
 MIDDLEWARE = [
