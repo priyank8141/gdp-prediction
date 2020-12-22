@@ -34,7 +34,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#"><h5 class="h5-nav">Notification</h5></a>
+            <a class="nav-link" href="#"><h5 class="h5-nav">Search</h5></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><h5 class="h5-nav">Request</h5></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#"><h5 class="h5-nav">profile</h5></a>
@@ -46,7 +49,24 @@
 
 
 <!--main body-->
-<h1 class="" style='margin-top:150px;' >Organization login</h1>
+<h1 class="" style='margin-top:150px;' >profile login</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h1>profile</h1>
+            <div>
+                <p>Name: {{ name }}</p>
+                <p>Email: {{ email }}</p>
+                <p>Mobile No: {{ mob }}</p>
+                <p>Role: {{ role }}</p>
+                <p>Village or organization Name: {{ von }}</p>
+                <p>Country: {{ country }}</p>
+                <p>State: {{ state }}</p>
+                <p>City: {{ city }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 <!--footer-->
 {% include 'footer.html' %}
 

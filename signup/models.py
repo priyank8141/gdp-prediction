@@ -14,8 +14,3 @@ class user(models.Model):
     state = models.CharField(max_length=100)
     district = models.CharField(max_length=100)
     password = models.CharField(max_length=150)
-
-
-
-
-
