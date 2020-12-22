@@ -1,7 +1,9 @@
 import psycopg2
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+
+
 # Create your views here.
 def show_login(request):
     print("this is login page")
@@ -10,7 +12,6 @@ def show_login(request):
 def logproess(request):
     conn = psycopg2.connect(database="agriculture", user='postgres', password='priyank8141', host='127.0.0.1',port='5432')
     cursor = conn.cursor()
-
     print("this is login process")
     if (request.method == 'POST'):
         try:
@@ -20,16 +21,17 @@ def logproess(request):
             cursor.execute(Query, (email,))
             records = cursor.fetchall()
             print(records)
-            id=records[0][0]
+            id = records[0][0]
             if records[0][10] == password:
                 print("success login")
-                if records[0][10] == 'farmer':
+                print(records[0][5])
+                if records[0][5] == 'farmer':
                     print("farmer")
                     return HttpResponseRedirect(reverse("farmerlog", args=(id,)))
-                elif records[0][10] == 'sarpanch':
+                elif records[0][5] == 'sarpanch':
                     print("sarpanch")
                     return HttpResponseRedirect(reverse("sarpanchlog", args=(id,)))
-                elif records[0][10] == 'organization':
+                elif records[0][5] == 'organization':
                     print("organization")
                     return HttpResponseRedirect(reverse("organizationlog", args=(id,)))
             else:

@@ -11,4 +11,4 @@ def farmerlog(request,id):
     cursor.execute(Query, (id,))
     records = cursor.fetchall()
     print(records)
-    return render(request, "successlogin.html")
+    return render(request, "farmer.html")

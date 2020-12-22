@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'signup',
     'farmer',
     'sarpanch',
+    'organization',
 ]
 
 MIDDLEWARE = [
