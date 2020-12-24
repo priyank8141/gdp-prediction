@@ -25,7 +25,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'sarpanchlog' id %}">
+      <a class="navbar-brand" href="{% url 'organizationlog' id %}">
             <h1>Company</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,16 +34,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#"><h5 class="h5-nav">Search</h5></a>
+            <a class="nav-link" href="{% url 'orgnotification' %}"><h5 class="h5-nav">Notification</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_request' %}"><h5 class="h5-nav">Request</h5></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'notification' %}"><h5 class="h5-nav">Notification</h5></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_profile' %}"><h5 class="h5-nav">{{name}}</h5></a>
+            <a class="nav-link" href="{% url 'orgprofile' %}"><h5 class="h5-nav">{{name}}</h5></a>
           </li>
         </ul>
       </div>
@@ -52,7 +46,38 @@
 
 
 <!--main body-->
-<h1 class="" style='margin-top:150px;'>sarpanch login</h1>
+<h1 class="" style='margin-top:150px;' >Org Hello {{name}},</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h1> Your Profile</h1>
+            <div style="font-size:25px;">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td><b>Name:</b> {{ name }}</td>
+                        <td><b>Email:</b> {{ email }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Mobile No:</b> {{ mob }}</td>
+                        <td><b>Role:</b> {{ role }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Village or organization Name:</b> {{ von }}</td>
+                        <td><b>Country:</b> {{ country }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>State:</b> {{ state }}</td>
+                        <td><b>City:</b> {{ city }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div><a href="{% url 'orglogout' %}"><button type="button" class="btn btn-danger">Logout</button></a></div>
+    <br>
+</div>
 <!--footer-->
 {% include 'footer.html' %}
 

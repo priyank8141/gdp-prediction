@@ -6,9 +6,9 @@ from . import views
 
 urlpatterns = [
 
-    path('farmerlog/<int:id>', views.farmerlog , name="farmerlog"),
-    path('profile', views.farmer_profile , name="farmer_profile"),
-    path('request', views.farmer_request , name="farmer_request"),
-    path('requestsend', views.request_process , name="requestprocess"),
-    path('logout', views.farmerlogout , name="farmerlogout"),
+    path('farmerlog/<int:id>', views.farmerlog, name="farmerlog"),
+    path('farmer_profile', views.farmer_profile, name="farmer_profile"),
+    path('farmer_request', views.farmer_request, name="farmer_request"),
+    path('requestfarmer', views.request_farmer, name="requestfarmer"),
+    path('farmerlogout', views.farmerlogout, name="farmerlogout"),
 ]

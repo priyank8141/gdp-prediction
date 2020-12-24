@@ -16,10 +16,10 @@ def farmerlog(request, id):
     records = cursor.fetchall()
     print(records)
     details={
-        'id' : records[0][0],
-        'name' : records[0][1],
-        'email' : records[0][2],
-        'mob' : records[0][3],
+        'id': records[0][0],
+        'name': records[0][1],
+        'email': records[0][2],
+        'mob': records[0][3],
         'role': records[0][5],
         'von': records[0][6],
         'country': records[0][7],
@@ -37,7 +37,7 @@ def farmer_request(request):
     print("this is request page")
     return render(request, "request.html",details)
 
-def request_process(request):
+def request_farmer(request):
     print(details)
     print(details['name'])
     if (request.method == 'POST'):

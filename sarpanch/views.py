@@ -65,6 +65,11 @@ def request_process(request):
     else:
         return render(request, "sarpanchrequest.html", details)
 
+
+def show_notification(request):
+    return render(request, "notification.html", details)
+
+
 def logout(request):
     global details
     details = {}
