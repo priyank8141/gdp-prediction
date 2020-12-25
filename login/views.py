@@ -1,7 +1,7 @@
 import psycopg2
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 
 
 # Create your views here.
@@ -39,19 +39,6 @@ def logproess(request):
                 'message': 'invalid password and username'
                 }
                 return render(request, "login.html", context)
-
-            # for row in records:
-            # print("Id = ", row[0], )
-            #     print("Model = ", row[1])
-            #     print("Price  = ", row[2])
-            # if ins is None:
-            #     context = {
-            #     'message': 'invalid password and username'
-            #     }
-            #     return render(request, "login.html",context)
-            # else:
-            #     return render(request, "signup.html")
-            #     print("success login")
         except (Exception, psycopg2.Error) as error:
             print("error:-", error)
 
