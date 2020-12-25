@@ -36,6 +36,8 @@ def orgprofile(request):
 
 
 def orgnotification(request):
+    data = Problem.objects.filter(role='sarpanch')
+    details['problem'] = data
     return render(request, "orgnoti.html", details)
 
 def orglogout(request):

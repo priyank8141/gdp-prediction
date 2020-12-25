@@ -67,6 +67,17 @@ def request_process(request):
 
 
 def show_notification(request):
+    city = details['city']
+    print(city)
+    data = Problem.objects.filter(role='farmer', district=city)
+    # city = details['city']
+    # Query = "select * from organization_problem where role='farmer' AND district = %s"
+    # cursor.execute(Query, (city,))
+    # problems = cursor.fetchall()
+    # print(problems)
+    # prob = [list(ele) for ele in problems]
+    # print(prob)
+    details['problem'] = data
     return render(request, "notification.html", details)
 
 
