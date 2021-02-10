@@ -50,8 +50,83 @@
 
 <!--main body-->
 <h1 class="" style='margin-top:150px;' >farmer login</h1>
+<br>
+<div class="input-group">
+				<form  class="form-inline" action="{% url 'process' %}" method="POST">
+					{% csrf_token%}
+                <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon"> </span>
+                <select class="form-control" required name="country" id="countyList">
+                    <option value=""  selected="selected">Select Country</option>
+                </select>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
 
+                <select class="form-control" required name="state" id="stateList">
+                    <option value="" selected="selected">Select State</option>
+                </select>
+                              <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
 
+                <select class="form-control" required name="city" id="cityList">
+                    <option value="" selected="selected">Select City / District </option>
+                </select>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+
+                  <input class="form-control" type="date" value="" id="example-date-input">
+					<script>
+            var worldData = {
+
+                India: {
+                	Assam: ["Bajali","Baksa","Barpeta & Baghbor","Biswanath","Bongaigaon"],
+                	Andhra_Pradesh: ["Anantapur","Chittoor","Cuddapah","East_Godavari","Guntur"],
+                	Chandigarh: ["Chandigarh"],
+                    Madhya_Pradesh:["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat"],
+                    Uttar_Pradesh:["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya"],
+                    Gujarat:["Ahmedabad","Amreli","Gandhinagar","Surat","Vadodara"],
+                    Haryana:["Ambala","Bhiwani","Charkhi & Dadri","Faridabad","Fatehabad"],
+                    Punjab:["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib"],
+                    West_Bengal:["Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling"],
+                    Karnataka:["Dharwad","Barnala","Bathinda","Gadag","Hassan","Haveri","Kalaburagi"],
+
+                },
+            };
+            window.onload = function () {
+                var countyList = document.getElementById("countyList"),
+                    stateList = document.getElementById("stateList"),
+                    cityList = document.getElementById("cityList");
+                for (var country in worldData) {
+                    countyList.options[countyList.options.length] = new Option(country, country);
+                }
+                countyList.onchange = function () {
+                    stateList.length = 1;
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    for (var state in worldData[this.value]) {
+                        stateList.options[stateList.options.length] = new Option(state, state);
+                    }
+                };
+                countyList.onchange();
+                stateList.onchange = function () {
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    var city = worldData[countyList.value][this.value];
+                    for (var i = 0; i < city.length; i++) {
+                        cityList.options[cityList.options.length] = new Option(city[i], city[i]);
+                    }
+                };
+            };
+</script>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+
+                  <input style="color: black;background-color: #FFC312;width: 100px;" type="submit" value="Search" class="btn float-right login_btn">
+                </form>
+</div>
+<br>
+<h3 class="" style='margin-top:10px;' >Weather Condition</h3>
 <!--footer-->
 {% include 'footer.html' %}
 

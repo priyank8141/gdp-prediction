@@ -1,11 +1,25 @@
 import psycopg2
 from django.shortcuts import render
-
 from organization.models import Problem
+from datetime import date
+import pandas as pd
 
 conn = psycopg2.connect(database="agriculture", user='postgres', password='priyank8141', host='127.0.0.1',port='5432')
 cursor = conn.cursor()
 details = {}
+
+def search_weather(country,state,city,dat):
+     customers = pd.read_excel(r'E:\agri datanalysis\temp_forecast.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
+     print(customers.head())
+     co=country
+     st=state
+     ci=city
+     da=dat
+     loc=ci+', '+st+', '+co
+     print(loc)
+     print(da)
+
+
 # Create your views here.
 def farmerlog(request, id):
     print("this is farmer loggedin page")
@@ -15,6 +29,13 @@ def farmerlog(request, id):
     cursor.execute(Query, (id,))
     records = cursor.fetchall()
     print(records)
+
+    co= records[0][7]
+    st= records[0][8]
+    ci= records[0][9]
+    da = date.today()
+    search_weather(co,st,ci,da)
+
     details={
         'id': records[0][0],
         'name': records[0][1],
@@ -26,6 +47,8 @@ def farmerlog(request, id):
         'state': records[0][8],
         'city': records[0][9]
     }
+
+
     return render(request, "farmer.html",details)
 
 def farmer_profile(request):

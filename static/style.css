@@ -169,3 +169,11 @@ input:focus{
     padding-bottom:50px;
 
 }
+.input-group-separator{
+    padding: 0;
+    width: 0;
+    border: none;
+}
+.form-control{
+    border-left: none;
+}
