@@ -9,8 +9,8 @@ cursor = conn.cursor()
 details = {}
 
 def search_weather(country,state,city,dat):
-     customers = pd.read_excel(r'E:\agri datanalysis\temp_forecast.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
-     print(customers.head())
+     weather_data = pd.read_excel(r'E:\agri datanalysis\temp_forecast.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
+     print(weather_data.head())
      co=country
      st=state
      ci=city
@@ -18,6 +18,17 @@ def search_weather(country,state,city,dat):
      loc=ci+', '+st+', '+co
      print(loc)
      print(da)
+     rslt_df = weather_data[(weather_data['Loc'] ==loc) & (weather_data['Date'] == da)]
+     print(rslt_df)
+     maxtemp=rslt_df.iloc[0]['Max_Temp']
+     mintemp = rslt_df.iloc[0]['Min_Temp']
+     windspeed = rslt_df.iloc[0]['Wind_Speed']
+     rain = rslt_df.iloc[0]['Rain']
+     humidity = rslt_df.iloc[0]['Humidity']
+     data_l1=[maxtemp,mintemp,windspeed,rain,humidity]
+     print(data_l1)
+     print(maxtemp)
+
 
 
 # Create your views here.
@@ -33,7 +44,7 @@ def farmerlog(request, id):
     co= records[0][7]
     st= records[0][8]
     ci= records[0][9]
-    da = date.today()
+    da = "2021-02-02"
     search_weather(co,st,ci,da)
 
     details={
