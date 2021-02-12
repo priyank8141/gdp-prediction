@@ -1,34 +1,30 @@
 import psycopg2
 from django.shortcuts import render
 from organization.models import Problem
-from datetime import date
 import pandas as pd
 
 conn = psycopg2.connect(database="agriculture", user='postgres', password='priyank8141', host='127.0.0.1',port='5432')
 cursor = conn.cursor()
 details = {}
 
-def search_weather(country,state,city,dat):
+def search_weather(country,state,city):
      weather_data = pd.read_excel(r'E:\agri datanalysis\temp_forecast.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
      print(weather_data.head())
      co=country
      st=state
      ci=city
-     da=dat
      loc=ci+', '+st+', '+co
-     print(loc)
-     print(da)
-     rslt_df = weather_data[(weather_data['Loc'] ==loc) & (weather_data['Date'] == da)]
-     print(rslt_df)
-     maxtemp=rslt_df.iloc[0]['Max_Temp']
-     mintemp = rslt_df.iloc[0]['Min_Temp']
-     windspeed = rslt_df.iloc[0]['Wind_Speed']
-     rain = rslt_df.iloc[0]['Rain']
-     humidity = rslt_df.iloc[0]['Humidity']
-     data_l1=[maxtemp,mintemp,windspeed,rain,humidity]
-     print(data_l1)
-     print(maxtemp)
+     # print(loc)
+     rslt_df = weather_data[weather_data['Loc'] == loc]
+     rslt_df=rslt_df[['Date','Rice','Wheat','Cotton','Jute','Tea']]
+     resulthtml = rslt_df.to_html(classes='table1 table', index=False)
+     # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
+     print(resulthtml)
 
+     # write html to file
+     text_file = open("templates/prediction.html", "w")
+     text_file.write(resulthtml)
+     text_file.close()
 
 
 # Create your views here.
@@ -44,8 +40,8 @@ def farmerlog(request, id):
     co= records[0][7]
     st= records[0][8]
     ci= records[0][9]
-    da = "2021-02-02"
-    search_weather(co,st,ci,da)
+
+    search_weather(co,st,ci)
 
     details={
         'id': records[0][0],

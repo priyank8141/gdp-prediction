@@ -26,16 +26,13 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
       <a class="navbar-brand" href="{% url 'farmerlog' id %}">
-            <h1>Company</h1>
+            <h1>Agricultural Economic Growth</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#"><h5 class="h5-nav">Search</h5></a>
-          </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'farmer_request' %}"><h5 class="h5-nav">Request</h5></a>
           </li>
@@ -45,18 +42,15 @@
         </ul>
       </div>
     </div>
-  </nav>
+</nav>
 
 
 <!--main body-->
-<h1 class="" style='margin-top:150px;' >farmer login</h1>
+<h1 class="default1" style="margin-top:150px;margin-left:10px;" >Farmer Login</h1>
 <br>
-<div class="input-group">
+<div class="input-group default1">
 				<form  class="form-inline" action="{% url 'process' %}" method="POST">
 					{% csrf_token%}
-                <span class="input-group-addon">-</span>
-                  <span class="input-group-addon">-</span>
-                  <span class="input-group-addon"> </span>
                 <select class="form-control" required name="country" id="countyList">
                     <option value=""  selected="selected">Select Country</option>
                 </select>
@@ -72,10 +66,6 @@
                 <select class="form-control" required name="city" id="cityList">
                     <option value="" selected="selected">Select City / District </option>
                 </select>
-                  <span class="input-group-addon">-</span>
-                  <span class="input-group-addon">-</span>
-
-                  <input class="form-control" type="date" value="" id="example-date-input">
 					<script>
             var worldData = {
 
@@ -119,6 +109,7 @@
                 };
             };
 </script>
+
                   <span class="input-group-addon">-</span>
                   <span class="input-group-addon">-</span>
 
@@ -126,7 +117,13 @@
                 </form>
 </div>
 <br>
-<h3 class="" style='margin-top:10px;' >Weather Condition</h3>
+<h2 class="default1" style='margin-top:10px;' >Weather Condition</h2>
+
+<div class="default1" style="width:80%;">
+{% include 'prediction.html' %}
+</div>
+
+
 <!--footer-->
 {% include 'footer.html' %}
 

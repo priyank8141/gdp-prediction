@@ -7,6 +7,10 @@
 }
 
 /*home view*/
+.default1{
+margin-left:30px;
+margin-right:30px;}
+
 .home{
     padding-top:250px;
     padding-bottom:60px;
@@ -176,4 +180,9 @@ input:focus{
 }
 .form-control{
     border-left: none;
+}
+
+.table1{
+color:blue;
+margin-left:10px;
 }
