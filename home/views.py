@@ -31,15 +31,15 @@ def signupuser(request):
                 city = request.POST['city']
                 newappuser = appusers(mobile=mobile_no,gender=gender,role=role,von=vo_name,country=country,state=state,district=city,user=user)
                 newappuser.save()
-                auth.login(request,user)
-                return HttpResponse("signedup")
+                context = {'message': 'successful signedup'}
+                return render(request, 'login.html', context)
         else:
             return render(request,'signup.html',{'error':"password doesn't match"})
     else:
         return render(request,'signup.html')
 
 def loginuser(request):
-    # if not request.user.is_authenticated:
+    if not request.user.is_authenticated:
         if request.method=="POST":
             uname = request.POST['email']
             passwd = request.POST['password']
@@ -47,7 +47,6 @@ def loginuser(request):
             if user is not None:
                 login(request, user)
                 print("loggedin")
-                # return HttpResponseRedirect('/profileuser')
                 print(request.user.id)
                 cstid=request.user.id
                 cstobj = appusers.objects.get(user_id=cstid)
@@ -64,7 +63,7 @@ def loginuser(request):
                           }
                 request.session['userdata'] = userdata
                 # print(userdata)
-                return HttpResponseRedirect('/profileuser')
+                return HttpResponseRedirect('profileuser')
 
             else:
                 print("incorect password")
@@ -73,8 +72,8 @@ def loginuser(request):
         else:
             print("login page without post")
             return render(request,'login.html')
-    # else:
-    #     return HttpResponseRedirect('/profile')
+    else:
+        return HttpResponseRedirect('profileuser')
 
 
 def logoutuser(request):
@@ -85,12 +84,12 @@ def logoutuser(request):
 
 def profileuser(request):
     userdata=request.session.get('userdata')
-    # print(userdata.username)
+    print(userdata)
     print(userdata['username'])
     if userdata['role'] == 'farmer':
         return HttpResponseRedirect('farmeruser',userdata)
     elif userdata['role'] == 'sarpanch':
-        return render(request, 'sarpanchprofile.html', userdata)
+        return render(request, 'sarpanch.html', userdata)
     elif userdata['role'] == 'organization':
-        return render(request, 'organizationprofile.html', userdata)
+        return render(request, 'organization.html', userdata)
 

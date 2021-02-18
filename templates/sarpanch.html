@@ -25,7 +25,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'sarpanchlog' id %}">
+      <a class="navbar-brand" href="{% url 'sarpanchuser' %}">
             <h1>Agricultural Economic Growth</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +35,13 @@
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_request' %}"><h5 class="h5-nav">Request</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchrequest' %}"><h5 class="h5-nav">Request</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'notification' %}"><h5 class="h5-nav">Notification</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchnoti' %}"><h5 class="h5-nav">Notification</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_profile' %}"><h5 class="h5-nav">{{name}}</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchprofile' %}"><h5 class="h5-nav">{{username}}</h5></a>
           </li>
         </ul>
       </div>
@@ -50,7 +50,85 @@
 
 
 <!--main body-->
-<h1 class="" style='margin-top:150px;'>sarpanch login</h1>
+<h2 class="default1" style="margin-top:150px;">Search for Weather Condition</h2>
+<br>
+<div class="input-group default1">
+				<form  class="form-inline" action="{% url 'sapredict' %}" method="POST">
+					{% csrf_token%}
+                <select class="form-control" required name="country" id="countyList">
+                    <option value=""  selected="selected">Select Country</option>
+                </select>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+
+                <select class="form-control" required name="state" id="stateList">
+                    <option value="" selected="selected">Select State</option>
+                </select>
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+
+                <select class="form-control" required name="city" id="cityList">
+                    <option value="" selected="selected">Select City / District </option>
+                </select>
+					<script>
+            var worldData = {
+
+                India: {
+                	Assam: ["Bajali","Baksa","Barpeta & Baghbor","Biswanath","Bongaigaon"],
+                	Andhra_Pradesh: ["Anantapur","Chittoor","Cuddapah","East_Godavari","Guntur"],
+                	Chandigarh: ["Chandigarh"],
+                    Madhya_Pradesh:["Agar Malwa","Alirajpur","Anuppur","Ashoknagar","Balaghat"],
+                    Uttar_Pradesh:["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya"],
+                    Gujarat:["Ahmedabad","Amreli","Gandhinagar","Surat","Vadodara"],
+                    Haryana:["Ambala","Bhiwani","Charkhi & Dadri","Faridabad","Fatehabad"],
+                    Punjab:["Amritsar","Barnala","Bathinda","Faridkot","Fatehgarh Sahib"],
+                    West_Bengal:["Bankura","Birbhum","Cooch Behar","Dakshin Dinajpur","Darjeeling"],
+                    Karnataka:["Dharwad","Barnala","Bathinda","Gadag","Hassan","Haveri","Kalaburagi"],
+
+                },
+            };
+            window.onload = function () {
+                var countyList = document.getElementById("countyList"),
+                    stateList = document.getElementById("stateList"),
+                    cityList = document.getElementById("cityList");
+                for (var country in worldData) {
+                    countyList.options[countyList.options.length] = new Option(country, country);
+                }
+                countyList.onchange = function () {
+                    stateList.length = 1;
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    for (var state in worldData[this.value]) {
+                        stateList.options[stateList.options.length] = new Option(state, state);
+                    }
+                };
+                countyList.onchange();
+                stateList.onchange = function () {
+                    cityList.length = 1;
+                    if (this.selectedIndex < 1) return;
+                    var city = worldData[countyList.value][this.value];
+                    for (var i = 0; i < city.length; i++) {
+                        cityList.options[cityList.options.length] = new Option(city[i], city[i]);
+                    }
+                };
+            };
+</script>
+
+                  <span class="input-group-addon">-</span>
+                  <span class="input-group-addon">-</span>
+
+                  <input style="color: black;background-color: #FFC312;width: 100px;" type="submit" value="Predict" class="btn float-right login_btn">
+                </form>
+</div>
+<br>
+<h2 class="default1" style='margin-top:10px;' >Weather Condition</h2>
+
+<div class="default1" style="width:80%;">
+{% include 'prediction.html' %}
+</div>
+
+
+
 <!--footer-->
 {% include 'footer.html' %}
 

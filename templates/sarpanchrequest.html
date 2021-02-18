@@ -25,7 +25,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'sarpanchlog' id %}">
+      <a class="navbar-brand" href="{% url 'sarpanchuser' %}">
             <h1>Agricultural Economic Growth</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +34,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_request' %}"><h5 class="h5-nav">Request</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchrequest' %}"><h5 class="h5-nav">Request</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'notification' %}"><h5 class="h5-nav">Notification</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchnoti' %}"><h5 class="h5-nav">Notification</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'show_profile' %}"><h5 class="h5-nav">{{name}}</h5></a>
+            <a class="nav-link" href="{% url 'sarpanchprofile' %}"><h5 class="h5-nav">{{username}}</h5></a>
           </li>
         </ul>
       </div>
@@ -53,7 +53,7 @@
 	<div class="row">
       <div class="col-md-7 col-md-offset-2">
         <div class="well well-sm">
-          <form class="form-horizontal" action="{% url 'requestprocess' %}" method="POST">
+          <form class="form-horizontal" action="{% url 'sarpanchrequest' %}" method="POST">
             {% csrf_token%}
           <fieldset>
             <legend class="text-center">Place Your Problem Details</legend>

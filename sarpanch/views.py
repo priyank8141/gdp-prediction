@@ -1,73 +1,54 @@
 import psycopg2
 from django.shortcuts import render
-
+from farmer.views import search_weather
 from organization.models import Problem
 
-conn = psycopg2.connect(database="agriculture", user='postgres', password='priyank8141', host='127.0.0.1',port='5432')
-cursor = conn.cursor()
-details = {}
 # Create your views here.
-def sarpanchlog(request,id):
-    print("this is sarpanch loggedin page")
-    global details
-    print(id)
-    Query = "select * from signup_user where id = %s"
-    cursor.execute(Query, (id,))
-    records = cursor.fetchall()
-    print(records)
-    details = {
-        'id': records[0][0],
-        'name': records[0][1],
-        'email': records[0][2],
-        'mob': records[0][3],
-        'role': records[0][5],
-        'von': records[0][6],
-        'country': records[0][7],
-        'state': records[0][8],
-        'city': records[0][9]
-    }
-    return render(request, "sarpanch.html", details)
+
+def sarpanchuser(request):
+    userdata = request.session.get('userdata')
+    co=userdata['country']
+    st= userdata['state']
+    di= userdata['district']
+    # search_weather(co,st,di)
+    return render(request, "sarpanch.html", userdata)
 
 
-def show_profile(request):
-    print(details)
-    print(details['name'])
-    return render(request, "sarpanchprofile.html", details)
+def sarpanchprofile(request):
+    userdata = request.session.get('userdata')
+    return render(request, "sarpanchprofile.html", userdata)
 
 
-def show_request(request):
-    print("this is request page")
-    return render(request, "sarpanchrequest.html", details)
 
-
-def request_process(request):
-    print(details)
-    print(details['name'])
+def sarpanchrequest(request):
+    userdata = request.session.get('userdata')
+    print(userdata['username'])
     if (request.method == 'POST'):
-        username = details['name']
-        print(username)
-        email = details['email']
-        mobile_no = details['mob']
-        role = details['role']
-        vo_name = details['von']
-        country = details['country']
-        state = details['state']
-        city = details['city']
-        subject = request.POST['subject']
-        detailprob = request.POST['problem']
-        ins = Problem(name=username, email=email, mobile=mobile_no, role=role, von=vo_name, country=country,
-                      state=state, district=city, subject=subject, detailproblem=detailprob, )
-        ins.save()
-        message = 'Problem Reported successfully'
-        details['message'] = message
-        print(details)
-        return render(request, "sarpanchrequest.html", details)
+            subject = request.POST['subject']
+            detailprob = request.POST['problem']
+            ins = Problem(name=userdata['username'],email=userdata['email'],mobile=userdata['mobile'],role=userdata['role'],von=userdata['von'],country=userdata['country'],state=userdata['state'],district=userdata['district'],subject=subject,detailproblem=detailprob,)
+            ins.save()
+            message= 'Problem Reported successfully'
+            userdata['message'] = message
+            print(userdata)
+            return render(request, "sarpanchrequest.html", userdata)
     else:
-        return render(request, "sarpanchrequest.html", details)
+            return render(request, "sarpanchrequest.html", userdata)
 
 
-def show_notification(request):
-    city = details['city']
+
+def sapredict(request):
+    userdata = request.session.get('userdata')
+    if (request.method == 'POST'):
+        co = request.POST['country']
+        st = request.POST['state']
+        ci = request.POST['city']
+        search_weather(co, st, ci)
+    return render(request, "sarpanch.html",userdata)
+
+def sarpanchnoti(request):
+    userdata = request.session.get('userdata')
+    city = userdata['district']
     print(city)
     data = Problem.objects.filter(role='farmer', district=city)
     # city = details['city']
@@ -77,8 +58,8 @@ def show_notification(request):
     # print(problems)
     # prob = [list(ele) for ele in problems]
     # print(prob)
-    details['problem'] = data
-    return render(request, "notification.html", details)
+    userdata['problem'] = data
+    return render(request, "notification.html", userdata)
 
 
 def logout(request):

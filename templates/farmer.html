@@ -46,10 +46,10 @@
 
 
 <!--main body-->
-<h1 class="default1" style="margin-top:150px;margin-left:10px;" >Farmer Login</h1>
+<h2 class="default1" style="margin-top:150px;">Search for Weather Condition</h2>
 <br>
 <div class="input-group default1">
-				<form  class="form-inline" action="" method="POST">
+				<form  class="form-inline" action="{% url 'fapredict' %}" method="POST">
 					{% csrf_token%}
                 <select class="form-control" required name="country" id="countyList">
                     <option value=""  selected="selected">Select Country</option>
