@@ -1,11 +1,8 @@
 import psycopg2
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from organization.models import Problem
 import pandas as pd
-
-conn = psycopg2.connect(database="agriculture", user='postgres', password='priyank8141', host='127.0.0.1',port='5432')
-cursor = conn.cursor()
-details = {}
 
 def search_weather(country,state,city):
      weather_data = pd.read_excel(r'E:\agri datanalysis\temp_forecast.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
@@ -14,7 +11,7 @@ def search_weather(country,state,city):
      st=state
      ci=city
      loc=ci+', '+st+', '+co
-     # print(loc)
+     print(loc)
      rslt_df = weather_data[weather_data['Loc'] == loc]
      rslt_df=rslt_df[['Date','Rice','Wheat','Cotton','Jute','Tea']]
      resulthtml = rslt_df.to_html(classes='table1 table', index=False)
@@ -28,68 +25,47 @@ def search_weather(country,state,city):
 
 
 # Create your views here.
-def farmerlog(request, id):
-    print("this is farmer loggedin page")
-    global details
-    print(id)
-    Query = "select * from signup_user where id = %s"
-    cursor.execute(Query, (id,))
-    records = cursor.fetchall()
-    print(records)
+def farmeruser(request):
+    userdata = request.session.get('userdata')
+    return render(request, "farmer.html", userdata)
 
-    co= records[0][7]
-    st= records[0][8]
-    ci= records[0][9]
+def farmerprofile(request):
+    userdata = request.session.get('userdata')
+    return render(request, "farmerprofile.html", userdata)
 
-    search_weather(co,st,ci)
+def farmerrequest(request):
+    pass
+    # userdata = request.session.get('userdata')
+    # print(userdata['name'])
+    # if (request.method == 'POST'):
+    #         username = details['username']
+    #         print(username)
+    #         email = details['email']
+    #         mobile_no = details['mob']
+    #         role = details['role']
+    #         vo_name = details['von']
+    #         country = details['country']
+    #         state = details['state']
+    #         city = details['city']
+    #         subject = request.POST['subject']
+    #         detailprob = request.POST['problem']
+    #         ins = Problem(name=userdata['username'],email=userdata['email'],mobile=userdata['mobile'],role=role,von=vo_name,country=country,state=state,district=city,subject=subject,detailproblem=detailprob,)
+    #         ins.save()
+    #         message= 'Problem Reported successfully'
+    #         details['message'] = message
+    #         print(details)
+    #         return render(request, "request.html", details)
+    # else:
+    #         return render(request, "request.html", details)
 
-    details={
-        'id': records[0][0],
-        'name': records[0][1],
-        'email': records[0][2],
-        'mob': records[0][3],
-        'role': records[0][5],
-        'von': records[0][6],
-        'country': records[0][7],
-        'state': records[0][8],
-        'city': records[0][9]
-    }
-
-
+def predict(request, id):
+    if (request.method == 'POST'):
+        co = request.POST['country']
+        st = request.POST['state']
+        ci = request.POST['city']
+        search_weather(co, st, ci)
     return render(request, "farmer.html",details)
 
-def farmer_profile(request):
-    print(details)
-    print(details['name'])
-    return render(request, "farmerprofile.html", details)
-
-def farmer_request(request):
-    print("this is request page")
-    return render(request, "request.html",details)
-
-def request_farmer(request):
-    print(details)
-    print(details['name'])
-    if (request.method == 'POST'):
-            username = details['name']
-            print(username)
-            email = details['email']
-            mobile_no = details['mob']
-            role = details['role']
-            vo_name = details['von']
-            country = details['country']
-            state = details['state']
-            city = details['city']
-            subject = request.POST['subject']
-            detailprob = request.POST['problem']
-            ins = Problem(name=username,email=email,mobile=mobile_no,role=role,von=vo_name,country=country,state=state,district=city,subject=subject,detailproblem=detailprob,)
-            ins.save()
-            message= 'Problem Reported successfully'
-            details['message'] = message
-            print(details)
-            return render(request, "request.html", details)
-    else:
-            return render(request, "request.html", details)
 
 
 def farmerlogout(request):

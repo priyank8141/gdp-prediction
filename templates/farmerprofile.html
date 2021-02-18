@@ -25,7 +25,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'farmerlog' id %}">
+      <a class="navbar-brand" href="{% url 'farmeruser' %}">
             <h1>Agricultural Economic Growth</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,10 +34,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmer_request' %}"><h5 class="h5-nav">Request</h5></a>
+            <a class="nav-link" href="{% url 'farmerrequest' %}"><h5 class="h5-nav">Request</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmer_profile' %}"><h5 class="h5-nav">{{name}}</h5></a>
+            <a class="nav-link" href="{% url 'farmerprofile' %}"><h5 class="h5-nav">{{username}}</h5></a>
           </li>
         </ul>
       </div>
@@ -46,7 +46,7 @@
 
 
 <!--main body-->
-<h1 class="" style='margin-top:150px;' >Hello {{name}},</h1>
+<h1 class="" style='margin-top:150px;' >Hello {{username}},</h1>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm">
@@ -55,11 +55,11 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                        <td><b>Name:</b> {{ name }}</td>
+                        <td><b>Name:</b> {{ username }}</td>
                         <td><b>Email:</b> {{ email }}</td>
                     </tr>
                     <tr>
-                        <td><b>Mobile No:</b> {{ mob }}</td>
+                        <td><b>Mobile No:</b> {{ mobile }}</td>
                         <td><b>Role:</b> {{ role }}</td>
                     </tr>
                     <tr>
@@ -68,14 +68,14 @@
                     </tr>
                     <tr>
                         <td><b>State:</b> {{ state }}</td>
-                        <td><b>City:</b> {{ city }}</td>
+                        <td><b>City:</b> {{ district }}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div><a href="{% url 'farmerlogout' %}"><button type="button" class="btn btn-danger">Logout</button></a></div>
+    <div><a href="{% url 'logoutuser' %}"><button type="button" class="btn btn-danger">Logout</button></a></div>
     <br>
 </div>
 <!--footer-->

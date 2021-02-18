@@ -28,15 +28,18 @@
 {% include 'header.html' %}
 
 <!--main body-->
+
 <div style="background-image: url({% static 'images/signbackground.jpeg' %})" class="signup container-fluid">
+<div class="container-fluid">
+	<h1 style="text-align:center;color:blue;">{{ message }}<br></h1>
+</div>
 	<div class="d-flex justify-content-center h-100">
 		<div class="signup-card card">
 			<div class=" signup-card-header card-header">
 				<h3>Sign Up</h3>
-
 			</div>
 			<div class="signup-card-body card-body">
-				<form action="{% url 'process' %}" method="POST">
+				<form action="{% url 'signupuser' %}" method="POST">
 					{% csrf_token%}
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
@@ -166,7 +169,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" required class="form-control" placeholder="confirm password">
+						<input type="password" name="cpassword" required class="form-control" placeholder="confirm password">
 					</div>
 					<div class="form-group">
 						<input style="color: black;background-color: #FFC312;width: 100px;" type="submit" value="Signup" class="btn float-right login_btn">

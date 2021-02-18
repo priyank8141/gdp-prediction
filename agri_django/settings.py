@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    'login',
-    'signup',
     'farmer',
     'sarpanch',
     'organization',
@@ -82,7 +80,7 @@ WSGI_APPLICATION = 'agri_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'agriculture',
+        'NAME': 'agriculture1',
          'USER': 'postgres',
         'PASSWORD': 'priyank8141',
         'HOST':'localhost'
