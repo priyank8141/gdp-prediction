@@ -19,7 +19,7 @@ def search_weather(country,state,city):
      # print(resulthtml)
 
      # write html to file
-     text_file = open("templates/prediction1.html", "w")
+     text_file = open("templates/prediction.html", "w")
      text_file.write(resulthtml)
      text_file.close()
 
