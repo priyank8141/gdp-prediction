@@ -20,7 +20,7 @@ def sarpanchprofile(request):
 
 
 
-def sarpanchrequest(request):
+def sarpanchreport(request):
     userdata = request.session.get('userdata')
     print(userdata['username'])
     if (request.method == 'POST'):
@@ -46,7 +46,7 @@ def sapredict(request):
         search_weather(co, st, ci)
     return render(request, "sarpanch.html",userdata)
 
-def sarpanchnoti(request):
+def sarpanchprob(request):
     userdata = request.session.get('userdata')
     city = userdata['district']
     print(city)

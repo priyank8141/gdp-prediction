@@ -4,6 +4,7 @@ from django.urls import path
 from home import views as hm
 from farmer import views as fa
 from sarpanch import views as sa
+from organization import views as org
 
 urlpatterns = [
     path('', hm.show_home, {}),
@@ -13,12 +14,16 @@ urlpatterns = [
     path('profileuser', hm.profileuser,name='profileuser'),
     path('farmeruser', fa.farmeruser,name='farmeruser'),
     path('farmerprofile', fa.farmerprofile,name='farmerprofile'),
-    path('farmerrequest', fa.farmerrequest,name='farmerrequest'),
+    path('farmerreport', fa.farmerreport,name='farmerreport'),
     path('fapredict', fa.fapredict,name='fapredict'),
     path('sarpanchuser', sa.sarpanchuser,name='sarpanchuser'),
     path('sarpanchprofile', sa.sarpanchprofile,name='sarpanchprofile'),
-    path('sarpanchrequest', sa.sarpanchrequest,name='sarpanchrequest'),
+    path('sarpanchreport', sa.sarpanchreport,name='sarpanchreport'),
     path('sapredict', sa.sapredict,name='sapredict'),
-    path('sarpanchnoti', sa.sarpanchnoti,name='sarpanchnoti'),
+    path('sarpanchprob', sa.sarpanchprob,name='sarpanchprob'),
+    path('orguser', org.orguser,name='orguser'),
+    path('orgprofile', org.orgprofile,name='orgprofile'),
+    path('orgprob', org.orgprob,name='orgprob'),
+
 
 ]

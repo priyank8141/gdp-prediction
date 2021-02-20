@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 
-  <title>Request</title>
+  <title>Report</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -34,10 +34,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmerrequest' %}"><h5 class="h5-nav">Request</h5></a>
+            <a class="nav-link" href="{% url 'farmerreport' %}"><h5 class="h5-nav">Report</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmerprofile' %}"><h5 class="h5-nav">{{name}}</h5></a>
+            <a class="nav-link" href="{% url 'farmerprofile' %}"><h5 class="h5-nav">{{username}}</h5></a>
           </li>
         </ul>
       </div>
@@ -50,7 +50,7 @@
 	<div class="row">
       <div class="col-md-7 col-md-offset-2">
         <div class="well well-sm">
-          <form class="form-horizontal" action="{% url 'farmerrequest' %}" method="POST">
+          <form class="form-horizontal" action="{% url 'farmerreport' %}" method="POST">
             {% csrf_token%}
           <fieldset>
             <legend class="text-center">Place Your Problem Details</legend>

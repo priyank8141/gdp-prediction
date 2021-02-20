@@ -37,7 +37,7 @@ def farmerprofile(request):
     userdata = request.session.get('userdata')
     return render(request, "farmerprofile.html", userdata)
 
-def farmerrequest(request):
+def farmerreport(request):
     userdata = request.session.get('userdata')
     print(userdata['username'])
     if (request.method == 'POST'):
