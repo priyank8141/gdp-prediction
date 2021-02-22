@@ -62,6 +62,7 @@
                 <th>Mob No</th>
                 <th>Subject</th>
                 <th>Problem</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -71,6 +72,10 @@
                 <td>{{i.mobile}}</td>
                 <td>{{i.subject}}</td>
                 <td>{{i.detailproblem}}</td>
+                <td><form action="{% url 'sardelete_data' i.id%}" method="POST" class="d-inline">
+                    {% csrf_token%}
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form></td>
             </tr>
             {% endfor %}
 

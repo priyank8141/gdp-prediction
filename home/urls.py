@@ -21,9 +21,10 @@ urlpatterns = [
     path('sarpanchreport', sa.sarpanchreport,name='sarpanchreport'),
     path('sapredict', sa.sapredict,name='sapredict'),
     path('sarpanchprob', sa.sarpanchprob,name='sarpanchprob'),
+    path('sardelete_data/<int:id>/', sa.sardelete_data,name='sardelete_data'),
     path('orguser', org.orguser,name='orguser'),
     path('orgprofile', org.orgprofile,name='orgprofile'),
     path('orgprob', org.orgprob,name='orgprob'),
-
+    path('orgdelete_data/<int:id>/', org.orgdelete_data,name='orgdelete_data'),
 
 ]

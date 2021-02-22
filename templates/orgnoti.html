@@ -63,6 +63,7 @@
                 <th>city/District</th>
                 <th>Subject</th>
                 <th>Problem</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -74,6 +75,10 @@
                 <td>{{i.district}}</td>
                 <td>{{i.subject}}</td>
                 <td>{{i.detailproblem}}</td>
+                <td><form action="{% url 'orgdelete_data' i.id%}" method="POST" class="d-inline">
+                    {% csrf_token%}
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form></td>
             </tr>
             {% endfor %}
 

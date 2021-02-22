@@ -51,18 +51,15 @@ def sarpanchprob(request):
     city = userdata['district']
     print(city)
     data = Problem.objects.filter(role='farmer', district=city)
-    # city = details['city']
-    # Query = "select * from organization_problem where role='farmer' AND district = %s"
-    # cursor.execute(Query, (city,))
-    # problems = cursor.fetchall()
-    # print(problems)
-    # prob = [list(ele) for ele in problems]
-    # print(prob)
     userdata['problem'] = data
     return render(request, "notification.html", userdata)
 
 
-def logout(request):
-    global details
-    details = {}
-    return render(request, "index.html")
+def sardelete_data(request,id):
+    userdata = request.session.get('userdata')
+    data = Problem.objects.filter(role='farmer')
+    userdata['problem'] = data
+    if request.method=="POST":
+        pi =Problem.objects.get(pk=id)
+        pi.delete()
+        return render(request, "notification.html", userdata)
