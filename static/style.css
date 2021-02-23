@@ -186,3 +186,13 @@ input:focus{
 color:blue;
 margin-left:10px;
 }
+
+.d a{
+  color: inherit; /* blue colors for links too */
+  text-decoration:none; /* no underline */
+  display:inline-block;
+}
+.d a:hover{
+  color: inherit; /* blue colors for links too */
+  text-decoration:none; /* no underline */
+}

@@ -91,5 +91,5 @@ def profileuser(request):
     elif userdata['role'] == 'sarpanch':
         return render(request, 'sarpanch.html', userdata)
     elif userdata['role'] == 'organization':
-        return render(request, 'organization.html', userdata)
+        return HttpResponseRedirect('orguser')
 

@@ -26,5 +26,6 @@ urlpatterns = [
     path('orgprofile', org.orgprofile,name='orgprofile'),
     path('orgprob', org.orgprob,name='orgprob'),
     path('orgdelete_data/<int:id>/', org.orgdelete_data,name='orgdelete_data'),
+    path('gdpgrowthstatewise', org.gdpgrowthstatewise,name='gdpgrowthstatewise'),
 
 ]

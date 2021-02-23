@@ -47,27 +47,11 @@
 
 <!--main body-->
 <div class="container" style='margin-top:150px;'>
-<div class="d row align-items-center">
-  <a class="alert alert-primary col-lg-5" href="{% url 'gdpgrowthstatewise' %}">
-    GDP Growth Of Every State Analytics
-  </a>
-  <a class="alert alert-secondary col-lg-5 ml-2"  href="#">
-
-  </a>
+  <h2>GDP Growth Every State</h2>
+{% autoescape off %}
+  {{ gdpgrowth }}
+{% endautoescape %}
 </div>
-<div class="d row align-items-center">
-  <a class="alert alert-success col-lg-5"  href="#">
-    GDP Growth Of Every State
-  </a>
-  <a class="alert alert-primary col-lg-5 ml-2" href="#">
-    GDP Growth Of Every State
-  </a>
-</div>
-</div>
-
-
-
-
 <!--footer-->
 {% include 'footer.html' %}
 
