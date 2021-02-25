@@ -27,5 +27,6 @@ urlpatterns = [
     path('orgprob', org.orgprob,name='orgprob'),
     path('orgdelete_data/<int:id>/', org.orgdelete_data,name='orgdelete_data'),
     path('gdpgrowthstatewise', org.gdpgrowthstatewise,name='gdpgrowthstatewise'),
+    path('rainvsgdp', org.rainvsgdp,name='rainvsgdp'),
 
 ]
