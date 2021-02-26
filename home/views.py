@@ -6,8 +6,12 @@ from django.contrib import auth
 from .models import appusers
 from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
-
+from django.template import Context, loader
 # Create your views here.
+
+def handler404(request,exception):
+    return render(request, '404.html', status=404)
+
 
 def show_home(request):
     print("this is home page")
@@ -77,19 +81,26 @@ def loginuser(request):
 
 
 def logoutuser(request):
-    request.session.flush()
-    logout(request)
-    print("loggedout")
-    return HttpResponseRedirect('loginuser')
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('loginuser')
+    else:
+        request.session.flush()
+        logout(request)
+        print("loggedout")
+        return HttpResponseRedirect('loginuser')
+
 
 def profileuser(request):
-    userdata=request.session.get('userdata')
-    print(userdata)
-    print(userdata['username'])
-    if userdata['role'] == 'farmer':
-        return HttpResponseRedirect('farmeruser',userdata)
-    elif userdata['role'] == 'sarpanch':
-        return render(request, 'sarpanch.html', userdata)
-    elif userdata['role'] == 'organization':
-        return HttpResponseRedirect('orguser')
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('loginuser')
+    else:
+        userdata=request.session.get('userdata')
+        print(userdata)
+        print(userdata['username'])
+        if userdata['role'] == 'farmer':
+            return HttpResponseRedirect('farmeruser',userdata)
+        elif userdata['role'] == 'sarpanch':
+            return render(request, 'sarpanch.html', userdata)
+        elif userdata['role'] == 'organization':
+            return HttpResponseRedirect('orguser')
 

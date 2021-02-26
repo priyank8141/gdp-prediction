@@ -20,6 +20,7 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
 <!-- Navigation -->
@@ -46,36 +47,15 @@
 
 
 <!--main body-->
-<div class="container font-weight-bold" style='margin-top:150px;'>
-<div class="d row align-items-center">
-  <a class="alert alert-primary col-lg-5" href="{% url 'gdpgrowthstatewise' %}">
-    GDP Growth Of Every State Analytics
-  </a>
-  <a class="alert alert-secondary col-lg-5 ml-2"  href="{% url 'rainvsgdp' %}">
-    Relation Between Rain and GDP Analytics
-  </a>
-</div>
-<div class="d row align-items-center">
-  <a class="alert alert-success col-lg-5"  href="{% url 'exportcrop' %}">
-    Export of Crop and its value
-  </a>
-  <a class="alert alert-primary col-lg-5 ml-2" href="{% url 'prod' %}">
-    Production Analystics
-  </a>
-</div>
-<div class="d row align-items-center">
-  <a class="alert alert-primary col-lg-5" href="{% url 'fertilizeruse' %}">
-    Fertilizer Consumption Analytics</a>
-  </a>
-  <a class="alert alert-secondary col-lg-5 ml-2"  href="">
-    Relation Between Rain and GDP Analytics
-  </a>
-</div>
-</div>
+<div class="container" style='margin-top:150px;'>
+  <h2>Total Crop Production</h2>
+<br>
 
-
-
-
+{% autoescape off %}
+  {{ prod }}
+{% endautoescape %}
+<br>
+</div>
 <!--footer-->
 {% include 'footer.html' %}
 

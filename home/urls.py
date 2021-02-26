@@ -1,13 +1,16 @@
 
 from django.contrib import admin
 from django.urls import path
+
+import home
 from home import views as hm
 from farmer import views as fa
 from sarpanch import views as sa
 from organization import views as org
 
+
 urlpatterns = [
-    path('', hm.show_home, {}),
+    path('', hm.show_home,{}),
     path('signupuser', hm.signupuser,name='signupuser'),
     path('loginuser', hm.loginuser,name='loginuser'),
     path('logoutuser', hm.logoutuser,name='logoutuser'),
@@ -29,5 +32,8 @@ urlpatterns = [
     path('gdpgrowthstatewise', org.gdpgrowthstatewise,name='gdpgrowthstatewise'),
     path('rainvsgdp', org.rainvsgdp,name='rainvsgdp'),
     path('exportcrop', org.exportcrop,name='exportcrop'),
+    path('prod', org.prod, name='prod'),
+    path('fertilizeruse', org.fertilizeruse, name='fertilizeruse'),
 
 ]
+
