@@ -28,5 +28,6 @@ urlpatterns = [
     path('orgdelete_data/<int:id>/', org.orgdelete_data,name='orgdelete_data'),
     path('gdpgrowthstatewise', org.gdpgrowthstatewise,name='gdpgrowthstatewise'),
     path('rainvsgdp', org.rainvsgdp,name='rainvsgdp'),
+    path('exportcrop', org.exportcrop,name='exportcrop'),
 
 ]

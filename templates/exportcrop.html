@@ -48,44 +48,26 @@
 
 <!--main body-->
 <div class="container" style='margin-top:150px;'>
-  <h2>Relation Between Rain and GDP</h2>
+  <h2>Relation of crop productions and export</h2>
 <br>
-  <form method="post" action="{% url 'rainvsgdp' %}">
+  <form method="post" action="{% url 'exportcrop' %}">
     {% csrf_token%}
     <select class="form-control form-control-lg col-4" name='state' onchange='if(this.value != 0) { this.form.submit(); }'>
-         <option value='Andaman and Nicobar Islands' >Select State</option>
-         <option value='Andaman and Nicobar Islands' >Andaman and Nicobar Islands</option>
-         <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-         <option value='ASSAM & MEGHALAYA'>ASSAM & MEGHALAYA</option>
-         <option value='Andhra Pradesh'>Andhra Pradesh</option>
-         <option value='Bihar'>Bihar</option>
-         <option value='Chhattisgarh'>Chhattisgarh</option>
-         <option value='DELHI, Haryana & CHANDIGARH'>DELHI, Haryana & CHANDIGARH</option>
-         <option value='Goa'>Goa</option>
-         <option value='Gujarat'>Gujarat</option>
-         <option value='Himachal Pradesh'>Himachal Pradesh</option>
-         <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
-         <option value='Jharkhand'>Jharkhand</option>
-         <option value='Karnataka'>Karnataka</option>
-         <option value='Kerala'>Kerala</option>
-         <option value='Madhya Pradesh'>Madhya Pradesh</option>
-         <option value='Maharashtra'>Maharashtra</option>
-         <option value='MANI NAGA MIZO TRIPURA'>MANI NAGA MIZO TRIPURA</option>
-         <option value='Odisha'>Odisha</option>
-         <option value='Punjab'>Punjab</option>
-         <option value='Rajasthan'>Rajasthan</option>
-         <option value='Sikkim & west bengal'>Sikkim & west bengal</option>
-         <option value='Tamil Nadu'>Tamil Nadu</option>
-         <option value='Telangana'>Telangana</option>
-         <option value='Uttar Pradesh'>Uttar Pradesh</option>
-         <option value='Uttarakhand'>Uttarakhand</option>
+         <option value='' >Select Crop</option>
+         <option value='BASMATI RICE' >BASMATI RICE</option>
+         <option value='NON BASMATI RICE'>NON BASMATI RICE</option>
+         <option value='GROUNDNUTS'>GROUNDNUTS</option>
+         <option value='ONIONS'>ONIONS</option>
+         <option value='PULSES'>PULSES</option>
+         <option value='MAIZE'>MAIZE</option>
+         <option value='WHEAT'>WHEAT</option>
     </select>
 </form>
 <br>
-    <h2>Showing relation of state {{st}} </h2>
+    <h2>Showing relation of crop production and export of {{ cr }} </h2>
 <br>
 {% autoescape off %}
-  {{ rainvsgdp }}
+  {{ exportcrop }}
 {% endautoescape %}
 <br>
 </div>
