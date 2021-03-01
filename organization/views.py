@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+from home.decorator import role_required
 from organization.models import Problem
 import matplotlib.pyplot as plt, mpld3
 import pandas as pd
@@ -14,7 +15,7 @@ from plotly.subplots import make_subplots
 
 sns.set_style('darkgrid')
 
-
+@role_required(allowed_roles =["organization"])
 def orguser(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -22,6 +23,7 @@ def orguser(request):
         userdata = request.session.get('userdata')
         return render(request, "organization.html", userdata)
 
+@role_required(allowed_roles =["organization"])
 def orgprofile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -30,6 +32,7 @@ def orgprofile(request):
         return render(request, "organizationprofile.html", userdata)
 
 
+@role_required(allowed_roles =["organization"])
 def orgprob(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -39,6 +42,8 @@ def orgprob(request):
         userdata['problem'] = data
         return render(request, "orgnoti.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def orgdelete_data(request,id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -51,6 +56,8 @@ def orgdelete_data(request,id):
             pi.delete()
             return render(request, "orgnoti.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def gdpgrowthstatewise(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -104,6 +111,8 @@ def gdpgrowthstatewise(request):
         userdata['gdpgrowth'] = plot_div
         return render(request, "gdpgrowthstatewise.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def rainvsgdp(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -143,6 +152,8 @@ def rainvsgdp(request):
         userdata['rainvsgdp'] = plot_div
         return render(request, "rainvsgdp.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def exportcrop(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -183,6 +194,8 @@ def exportcrop(request):
         userdata['exportcrop'] = plot_div
         return render(request, "exportcrop.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def prod(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -217,6 +230,8 @@ def prod(request):
         userdata['prod'] = plot_div
         return render(request, "production.html", userdata)
 
+
+@role_required(allowed_roles =["organization"])
 def fertilizeruse(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')

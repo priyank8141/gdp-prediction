@@ -2,10 +2,13 @@ import psycopg2
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from farmer.views import search_weather
+from home.decorator import role_required
 from organization.models import Problem
 
 # Create your views here.
 
+
+@role_required(allowed_roles =["sarpanch"])
 def sarpanchuser(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -18,6 +21,7 @@ def sarpanchuser(request):
         return render(request, "sarpanch.html", userdata)
 
 
+@role_required(allowed_roles =["sarpanch"])
 def sarpanchprofile(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -27,6 +31,7 @@ def sarpanchprofile(request):
 
 
 
+@role_required(allowed_roles =["sarpanch"])
 def sarpanchreport(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -47,6 +52,7 @@ def sarpanchreport(request):
 
 
 
+@role_required(allowed_roles =["sarpanch"])
 def sapredict(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -59,6 +65,8 @@ def sapredict(request):
             search_weather(co, st, ci)
         return render(request, "sarpanch.html",userdata)
 
+
+@role_required(allowed_roles =["sarpanch"])
 def sarpanchprob(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
@@ -71,6 +79,7 @@ def sarpanchprob(request):
         return render(request, "notification.html", userdata)
 
 
+@role_required(allowed_roles =["sarpanch"])
 def sardelete_data(request,id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')

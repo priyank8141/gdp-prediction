@@ -100,7 +100,7 @@ def profileuser(request):
         if userdata['role'] == 'farmer':
             return HttpResponseRedirect('farmeruser',userdata)
         elif userdata['role'] == 'sarpanch':
-            return render(request, 'sarpanch.html', userdata)
+            return HttpResponseRedirect('sarpanchuser',userdata)
         elif userdata['role'] == 'organization':
-            return HttpResponseRedirect('orguser')
+            return HttpResponseRedirect('orguser',userdata)
 
