@@ -8,19 +8,116 @@ import pandas as pd
 
 
 def search_weather(country,state,city):
-     weather_data = pd.read_excel(r'E:\agri datanalysis\forecast data.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
-     # print(weather_data.head())
-     loc=city+', '+state+', '+country
-     print(loc)
-     rslt_df = weather_data[weather_data['Loc'] == loc]
-     rslt_df=rslt_df[['Loc','Date','Rice','Wheat','Cotton','Jute','Tea']]
-     resulthtml = rslt_df.to_html(classes='table1 table', index=False)
+     # weather_data = pd.read_excel(r'E:\agri datanalysis\forecast data.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
+     df = pd.read_csv(r'E:\agri datanalysis\forecastdata.csv', sep=',', index_col=False)
+
+     # wheat pred
+     def rice(mxt, mit, r, ):
+         if mit >= 15 and mxt <= 32 and r <= 1000:
+             return "Safe"
+         else:
+             if mit < 15:
+                 return "Temperature will go very low"
+             elif mxt > 32:
+                 return "Temperature will go very high"
+             else:
+                 return "heavy rainfall"
+
+     # wheat pred
+     def wheat(mxt, mit, r, ):
+         if mit >= 2 and mxt <= 35 and r <= 80:
+             return "Safe"
+         else:
+             if mit < 2:
+                 return "Temp will go very low"
+             elif mxt > 35:
+                 return "Temp will go very high"
+             else:
+                 return "Heavy Rainfall"
+
+     # cotton pred
+     def cotton(mxt, mit, r, ):
+         if mit >= 10 and mxt <= 35 and r <= 150:
+             return "Safe"
+         else:
+             if mit < 10:
+                 return "Temp will go very low"
+             elif mxt > 35:
+                 return "Temp will go very high"
+             else:
+                 return "Heavy Rainfall"
+
+     # jute pred
+     def jute(mxt, r, ):
+         if r <= 250 and mxt >= 25:
+             return "Safe"
+         else:
+             if mxt < 25:
+                 return "Temp will go very low"
+             else:
+                 return "Heavy Rainfall"
+
+     # cotton pred
+     def tea(mxt, mit, r, ):
+         if mit >= 20 and mxt <= 32 and r <= 300:
+             return "safe"
+         else:
+             if mit < 20:
+                 return "Temp will go very low"
+             elif mxt > 32:
+                 return "Temp will go very high"
+             else:
+                 return "Heavy Rainfall"
+
+     df['Rice'] = df.apply(lambda row: rice(row['max_temp_C'],
+                                            row['min_temp C'], row['Rain cm']), axis=1)
+
+     df['Wheat'] = df.apply(lambda row: wheat(row['max_temp_C'],
+                                              row['min_temp C'], row['Rain cm']), axis=1)
+
+     df['Cotton'] = df.apply(lambda row: cotton(row['max_temp_C'],
+                                                row['min_temp C'], row['Rain cm']), axis=1)
+
+     df['Jute'] = df.apply(lambda row: jute(row['max_temp_C'],
+                                            row['Rain cm']), axis=1)
+
+     df['Tea'] = df.apply(lambda row: tea(row['max_temp_C'],
+                                          row['min_temp C'], row['Rain cm']), axis=1)
+
+     loc = city+', '+state+', '+country
+
+     sd = "2/2/2021"
+     ed = "9/2/2021"
+     df = df[(df['Loc'] == loc) & (df['Date'] >= sd) & (df['Date'] <= ed)]
+     df = df[['Loc', 'Date', 'Rice', 'Wheat', 'Cotton', 'Jute', 'Tea']]
+
+     def color_text(val):
+         color = ""
+         if val == "Temp will go very low":
+             color = 'red'
+         elif val == "Temp will go very high":
+             color = 'red'
+         elif val == "Heavy Rainfal":
+             color = 'red'
+         elif val == "Safe":
+             color = 'green'
+
+         return 'color: %s' % color
+
+     df = df.style.applymap(color_text) \
+         .set_table_attributes('border="1" class="dataframe table table1"')
+
+
+     print(df)
+     # resulthtml = df.to_html(classes='table1 table', index=False)
+     df_html=df.render()
+     print(df_html)
      # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
-     print(resulthtml)
+     # print(resulthtml)
 
      # # write html to file
      text_file = open("templates/prediction.html", "w")
-     text_file.write(resulthtml)
+     text_file.write(df_html)
      text_file.close()
 
 
@@ -79,5 +176,6 @@ def fapredict(request):
             co = request.POST['country']
             st = request.POST['state']
             ci = request.POST['city']
+            print(ci)
             search_weather(co, st, ci)
         return render(request, "farmer.html",userdata)
