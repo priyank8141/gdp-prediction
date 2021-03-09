@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+
+<meta charset="utf-8">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,11 +16,15 @@
   <!--Fontawesome CDN-->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
+<!--  <link rel="stylesheet" type="text/css" href="{% static '/css/bootstrap.css'%}" >-->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css'%}" >
+
 
   <title>Agriculture django</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
 <!-- Navigation -->
@@ -55,16 +60,16 @@
 						<input type="checkbox">Remember Me
 					</div>
 					<div class="form-group">
-						<input style="color: black;background-color: #FFC312; width: 100px;" type="submit" value="Login" class="btn float-right" id="login_bt">
+						<input class="btn float-right login-btn" style="width:100px;" type="submit" value="Login" >
 					</div>
 				</form>
 			</div>
 			<div class="card-footer login-card-footer">
 				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="signupuser" > Sign Up</a>
+					Don't have an account?<a href="signupuser" style="color:#ef664d;" > Sign Up</a>
 				</div>
 				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
+					<a href="#" style="color:#ef664d;">Forgot your password?</a>
 				</div>
 			</div>
 		</div>

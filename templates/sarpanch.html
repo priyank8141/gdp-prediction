@@ -23,10 +23,10 @@
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark static-top">
+<nav class="navbar fixed-top navbar-dark navbar-expand-lg static-top header">
     <div class="container">
       <a class="navbar-brand" href="{% url 'sarpanchuser' %}">
-            <h1>Agricultural Economic Growth</h1>
+            <h1 class="h5-nav">AEG</h1>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -50,7 +50,8 @@
 
 
 <!--main body-->
-<h2 class="default1" style="margin-top:150px;">Search for Weather Condition</h2>
+<div class="container" style="margin-top:100px; margin-bottom:50px;">
+<h2 class="default1">Search for Weather Condition</h2>
 <br>
 <div class="input-group default1">
 				<form  class="form-inline" action="{% url 'sapredict' %}" method="POST">
@@ -117,7 +118,7 @@
                   <span class="input-group-addon">-</span>
                   <span class="input-group-addon">-</span>
 
-                  <input style="color: black;background-color: #FFC312;width: 100px;" type="submit" value="Predict" class="btn float-right login_btn">
+                  <input style="color: black;background-color: #FFC312;width: 100px;" type="submit" value="Predict" class="btn float-right login-btn">
                 </form>
 </div>
 <br>
@@ -126,7 +127,7 @@
 <div class="default1" style="width:80%;">
 {% include 'prediction.html' %}
 </div>
-
+</div>
 
 
 <!--footer-->

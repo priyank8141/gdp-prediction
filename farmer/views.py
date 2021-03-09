@@ -1,3 +1,6 @@
+import os
+import time
+
 import psycopg2
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -60,7 +63,7 @@ def search_weather(country,state,city):
      # cotton pred
      def tea(mxt, mit, r, ):
          if mit >= 20 and mxt <= 32 and r <= 300:
-             return "safe"
+             return "Safe"
          else:
              if mit < 20:
                  return "Temp will go very low"
@@ -87,8 +90,8 @@ def search_weather(country,state,city):
      loc = city+', '+state+', '+country
 
      sd = "2/2/2021"
-     ed = "9/2/2021"
-     df = df[(df['Loc'] == loc) & (df['Date'] >= sd) & (df['Date'] <= ed)]
+     ed = "2/9/2021"
+     df = df[(df['Loc'] == loc) & (df['Date'] > sd) & (df['Date'] <= ed)]
      df = df[['Loc', 'Date', 'Rice', 'Wheat', 'Cotton', 'Jute', 'Tea']]
 
      def color_text(val):
@@ -111,13 +114,17 @@ def search_weather(country,state,city):
      print(df)
      # resulthtml = df.to_html(classes='table1 table', index=False)
      df_html=df.render()
-     print(df_html)
+     # print(df)
      # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
      # print(resulthtml)
 
      # # write html to file
+     # os.remove("templates/prediction.html")
      text_file = open("templates/prediction.html", "w")
+     text_file.truncate(0)
+     time.sleep(2)
      text_file.write(df_html)
+     time.sleep(2)
      text_file.close()
 
 
@@ -132,7 +139,7 @@ def farmeruser(request):
         st= userdata['state']
         di= userdata['district']
         search_weather(co,st,di)
-
+        time.sleep(5)
         return render(request, "farmer.html", userdata)
 
 
@@ -166,16 +173,18 @@ def farmerreport(request):
                 return render(request, "request.html", userdata)
 
 
-@role_required(allowed_roles =["farmer"])
+@role_required(allowed_roles = ["farmer"])
 def fapredict(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('loginuser')
     else:
-        userdata = request.session.get('userdata')
         if (request.method == 'POST'):
+            userdata = request.session.get('userdata')
+            print("fapred")
             co = request.POST['country']
             st = request.POST['state']
             ci = request.POST['city']
             print(ci)
             search_weather(co, st, ci)
+            time.sleep(5)
         return render(request, "farmer.html",userdata)

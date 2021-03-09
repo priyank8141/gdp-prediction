@@ -1,12 +1,18 @@
 /*nav bar*/
+.header{
+    background-color:#2e3e4e;
+}
+
 .h5-nav{
-    color:white;
+    color:#fefefe;
+
 }
 .h5-nav:hover{
-    color: white;
+    color:#ef664d;
 }
 
 /*home view*/
+
 .default1{
 margin-left:30px;
 margin-right:30px;
@@ -128,14 +134,19 @@ input:focus{
     margin-right: 5px;
 }
 
-.login_btn{
-    color: black;
-    background-color: white;
-    width: 100px;
+.login-btn{
+    color: #fefefe !important;
+    background-color:#FFC312 !important;
+    width: 100px !important;
+    border:2px solid #FFC312 !important;
+    border-radius:5px !important;
 }
 
-.login_btn:hover{
-    background-color: white;
+.login-btn:hover{
+    background-color:#fefefe !important;
+    color:#FFC312 !important;
+    border:2px solid #FFC312 !important;
+    border-radius:5px !important;
     }
 
 .links{
@@ -169,10 +180,6 @@ input:focus{
     color: white;
     }
 
-.requestform{
-    padding-top:160px;
-    padding-bottom:50px;
-}
 .input-group-separator{
     padding: 0;
     width: 0;
@@ -195,4 +202,27 @@ margin-left:10px;
 .d a:hover{
   color: inherit; /* blue colors for links too */
   text-decoration:none; /* no underline */
+}
+
+.btn-default {
+    color: #fefefe !important;
+    background-color:#ef664d !important;
+    border:2px solid #ef664d !important;
+    border-radius:5px !important;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #ef664d !important;
+    background-color: #fefefe !important;
+    border:2px solid #ef664d !important;
+    border-radius:5px !important;
+
+}
+
+.footer-style{
+    background-color:#2e3e4e;
+    color:#fefefe;
+    text-align:center;
+    padding-top:1px;
+    padding-bottom:1px;
+    font-size:15px;
 }
