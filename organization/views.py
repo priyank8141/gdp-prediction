@@ -63,51 +63,219 @@ def gdpgrowthstatewise(request):
         return HttpResponseRedirect('loginuser')
     else:
         userdata = request.session.get('userdata')
+        # cols=[0,1,2,3,4]
         gdp = pd.read_excel(r'E:\agri datanalysis\India_statewise_GDP_data_new 1-15.xlsx', sheet_name='Sheet2')
         # print(gdp.Country)
 
-        x = gdp['year crore']
-
-        ## show all states:
+        # x = gdp['year crore']
+        # data=[{
+        #     'x':x,
+        #     'y':gdp[Col],
+        #     'name':Col
+        #     }
+        #     for Col in gdp
+        #         if Col != 'year crore']
         #
-        # for Country in gdp:
-        #     if Country != 'year crore':
-        #         plt.plot(x, gdp[Country], marker='.', label=Country)
-                # plot_div=plot([Scatter(x=x,y=gdp[Country],mode='lines',name='test',opacity=0.8,marker_color='green')],output_type='div',include_plotlyjs=False)
-
-        # plot_div=plot(fig,output_type='div',include_plotlyjs=False)
-
-        ## show only 5 states:
-
-        # plt.plot(x,gdp.Punjab,color='r',label='Punjab')
-        # plt.plot(x,gdp['DELHI, Haryana & CHANDIGARH'],color='g',label='Haryan, Delhi')
-        # plt.plot(x,gdp['Gujarat'],color='b',label='Gujarat')
-        # plt.plot(x,gdp['Uttar Pradesh'],color='black',label='Uttar Pradesh')
-        # plt.plot(x,gdp['Madhya Pradesh'],color='y',label='Madhya Pradesh')
-
-        # plt.xticks(gdp['year crore'][::2])
-        # plt.xlabel('Year', fontdict={'fontname': 'Comic sans MS'})
-        # plt.ylabel('GDP in CRORE', fontdict={'fontname': 'Comic sans MS'})
-        # plt.legend(loc=2)
-
-        # plt.show()
-        # resulthtml = mpld3.fig_to_html(fig)
-
-        data=[{
-            'x':x,
-            'y':gdp[Col],
-            'name':Col
-            }
-            for Col in gdp
-                if Col != 'year crore']
-
         layout=go.Layout(
-        xaxis = dict(title='<b>Year</b>'),
-        yaxis = dict(title='<b>GDP in M</b>')
+            xaxis = dict(title='<b>Year</b>'),
+            yaxis = dict(title='<b>GDP in M</b>')
         )
-        fig =go.Figure(data=data,layout=layout)
-        plot_div=pyo.plot(fig,output_type='div',include_plotlyjs=False)
+        # fig =go.Figure(data=data,layout=layout)
+        # plot_div=pyo.plot(fig,output_type='div',include_plotlyjs=False)
 
+        fig =go.Figure(layout=layout)
+
+        for column in gdp.columns.to_list():
+            if column != 'year crore':
+                fig.add_trace(
+                    go.Scatter(
+                        x=gdp['year crore'],
+                        y=gdp[column],
+                        name=column
+                    )
+                )
+        fig.update_layout(
+            updatemenus=[go.layout.Updatemenu(
+                active=0,
+                buttons=list(
+                    [dict(label='All',
+                          method='update',
+                          args=[{'visible': [True, True, True, True,True, True, True, True,True, True, True, True,True, True, True, True,True, True, True, True,True, True, True, True, True]},
+                                {'title': 'All',
+                                 'showlegend': True}]),
+                     dict(label='Andaman and Nicobar Islands',
+                          method='update',
+                          args=[{'visible': [True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},
+                                # the index of True aligns with the indices of plot traces
+                                {'title': 'Andaman and Nicobar Islands',
+                                 'showlegend': True}]),
+                     dict(label='Arunachal Pradesh',
+                          method='update',
+                          args=[{'visible': [False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},
+                                {'title': 'Arunachal Pradesh',
+                                 'showlegend': True}]),
+                     dict(label='ASSAM & MEGHALAYA',
+                          method='update',
+                          args=[{'visible': [False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},
+                                {'title': 'ASSAM & MEGHALAYA',
+                                 'showlegend': True}]),
+                     dict(label='Andhra Pradesh',
+                          method='update',
+                          args=[{'visible': [False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]},
+                                {'title': 'Andhra Pradesh',
+                                 'showlegend': True}]),
+                     dict(label='Bihar',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, True, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Bihar',
+                                 'showlegend': True}]),
+                     dict(label='Chhattisgarh',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, True, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Chhattisgarh',
+                                 'showlegend': True}]),
+                     dict(label='DELHI, Haryana & CHANDIGARH',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, True, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'DELHI, Haryana & CHANDIGARH',
+                                 'showlegend': True}]),
+                     dict(label='Goa',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, True, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Goa',
+                                 'showlegend': True}]),
+                     dict(label='Gujarat',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, True, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Gujarat',
+                                 'showlegend': True}]),
+                     dict(label='Himachal Pradesh',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, True,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Himachal Pradesh',
+                                 'showlegend': True}]),
+                     dict(label='Jammu and Kashmir',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             True, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Jammu and Kashmir',
+                                 'showlegend': True}]),
+                     dict(label='Jharkhand',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, True, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Jharkhand',
+                                 'showlegend': True}]),
+                     dict(label='Karnataka',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, True, False, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Karnataka',
+                                 'showlegend': True}]),
+                     dict(label='Kerala',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, True, False, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Kerala',
+                                 'showlegend': True}]),
+                     dict(label='Madhya Pradesh',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, True, False, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Madhya Pradesh',
+                                 'showlegend': True}]),
+                     dict(label='Maharashtra',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, True, False, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Maharashtra',
+                                 'showlegend': True}]),
+                     dict(label='MANI NAGA MIZO TRIPURA',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, True, False, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'MANI NAGA MIZO TRIPURA',
+                                 'showlegend': True}]),
+                     dict(label='Odisha',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, True, False, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Odisha',
+                                 'showlegend': True}]),
+                     dict(label='Punjab',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, True, False,
+                                             False, False, False, False, False]},
+                                {'title': 'Punjab',
+                                 'showlegend': True}]),
+                     dict(label='Rajasthan',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, True,
+                                             False, False, False, False, False]},
+                                {'title': 'Rajasthan',
+                                 'showlegend': True}]),
+                     dict(label='Sikkim & west bengal',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             True, False, False, False, False]},
+                                {'title': 'Sikkim & west bengal',
+                                 'showlegend': True}]),
+                     dict(label='Tamil Nadu',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, True, False, False, False]},
+                                {'title': 'Tamil Nadu',
+                                 'showlegend': True}]),
+                     dict(label='Telangana',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, True, False, False]},
+                                {'title': 'Telangana',
+                                 'showlegend': True}]),
+                     dict(label='Uttar Pradesh',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, True, False]},
+                                {'title': 'Uttar Pradesh',
+                                 'showlegend': True}]),
+                     dict(label='Uttarakhand',
+                          method='update',
+                          args=[{'visible': [False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, False, False, False, False, False, False,
+                                             False, False, False, False, True]},
+                                {'title': 'Uttarakhand',
+                                 'showlegend': True}]),
+                     ])
+            )
+            ]),
+
+        plot_div=pyo.plot(fig,output_type='div',include_plotlyjs=False)
         userdata['gdpgrowth'] = plot_div
         return render(request, "gdpgrowthstatewise.html", userdata)
 

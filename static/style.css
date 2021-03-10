@@ -18,47 +18,6 @@ margin-left:30px;
 margin-right:30px;
 }
 
-.home{
-    padding-top:250px;
-    padding-bottom:60px;
-    background-size: cover;
-}
-.home1{
-    color:green;
-    text-align: center;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:larger;
-    padding-left:30px;
-    padding-top:100px;
-}
-.home2{
-    padding-left:30px ;
-}
-
-.about{
-    padding-top:50px;
-    padding-bottom:50px;
-    background-color:#76f774;
-}
-
-.services{
-    padding-top:50px;
-    padding-bottom:50px;
-    background-color: indigo;
-    color: white;
-}
-
-.services1{
-    text-align: center;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:25px;
-    padding-top: 30px;
-    padding-left: 30px;
-    padding-bottom: 30px;
-}
-
 div.item {
     vertical-align: top;
     display: inline-block;
@@ -66,13 +25,11 @@ div.item {
     width: 120px;
 }
 
-.caption {
-    display: block;
-}
-.contact{
-    padding-top:10px;
-    padding-bottom:10px;
-}
+
+
+
+
+
 
 /*login*/
 .login{

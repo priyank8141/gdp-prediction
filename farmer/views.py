@@ -113,19 +113,47 @@ def search_weather(country,state,city):
 
      print(df)
      # resulthtml = df.to_html(classes='table1 table', index=False)
-     df_html=df.render()
+     result = '''
+     <html>
+     <head>
+     <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+     <meta http-equiv="Pragma" content="no-cache">
+     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+     <meta http-equiv="expires" content="0">
+     <style>
+     </style>
+     </head>
+     <body>
+         '''
+     result += df.render()
+     result += '''
+     </body>
+     </html>
+     '''
      # print(df)
      # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
      # print(resulthtml)
 
      # # write html to file
-     # os.remove("templates/prediction.html")
-     text_file = open("templates/prediction.html", "w")
-     text_file.truncate(0)
-     time.sleep(2)
-     text_file.write(df_html)
-     time.sleep(2)
-     text_file.close()
+     if os.path.exists("templates/prediction.html"):
+        os.remove("templates/prediction.html")
+        print("file deleted")
+        time.sleep(5)
+
+     else:
+         print("The file does not exist")
+
+     if os.path.exists("templates/prediction.html"):
+        print("file still exists")
+     else:
+         text_file = open("templates/prediction.html", "w")
+         text_file.write(result)
+         print(result)
+         print("file success written")
+         text_file.close()
+
+     # text_file.truncate(0)
+     # time.sleep(2)
 
 
 # Create your views here.
@@ -139,7 +167,7 @@ def farmeruser(request):
         st= userdata['state']
         di= userdata['district']
         search_weather(co,st,di)
-        time.sleep(5)
+        # time.sleep(5)
         return render(request, "farmer.html", userdata)
 
 
@@ -186,5 +214,5 @@ def fapredict(request):
             ci = request.POST['city']
             print(ci)
             search_weather(co, st, ci)
-            time.sleep(5)
+            # time.sleep(5)
         return render(request, "farmer.html",userdata)
