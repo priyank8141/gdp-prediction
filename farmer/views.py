@@ -1,7 +1,8 @@
 import os
 import time
-
+import json
 import psycopg2
+from django.core.cache import cache
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -12,7 +13,8 @@ import pandas as pd
 
 def search_weather(country,state,city):
      # weather_data = pd.read_excel(r'E:\agri datanalysis\forecast data.xlsx',sheet_name=0,header=0,index_col=False,keep_default_na=True)
-     df = pd.read_csv(r'E:\agri datanalysis\forecastdata.csv', sep=',', index_col=False)
+     df = pd.read_csv(r'E:\agri datanalysis\forecastdata.csv')
+     print(df)
 
      # wheat pred
      def rice(mxt, mit, r, ):
@@ -92,68 +94,54 @@ def search_weather(country,state,city):
      sd = "2/2/2021"
      ed = "2/9/2021"
      df = df[(df['Loc'] == loc) & (df['Date'] > sd) & (df['Date'] <= ed)]
+     print(df)
      df = df[['Loc', 'Date', 'Rice', 'Wheat', 'Cotton', 'Jute', 'Tea']]
 
-     def color_text(val):
-         color = ""
-         if val == "Temp will go very low":
-             color = 'red'
-         elif val == "Temp will go very high":
-             color = 'red'
-         elif val == "Heavy Rainfal":
-             color = 'red'
-         elif val == "Safe":
-             color = 'green'
+     # def color_text(val):
+     #     color = ""
+     #     if val == "Temp will go very low":
+     #         color = 'red'
+     #     elif val == "Temp will go very high":
+     #         color = 'red'
+     #     elif val == "Heavy Rainfal":
+     #         color = 'red'
+     #     elif val == "Safe":
+     #         color = 'green'
+     #
+     #     return 'color: %s' % color
 
-         return 'color: %s' % color
-
-     df = df.style.applymap(color_text) \
-         .set_table_attributes('border="1" class="dataframe table table1"')
-
-
+     # df = df.style.applymap(color_text) \
+     #     .set_table_attributes('border="1" class="dataframe table table1"')
+     # dfhtml = df.render()
      print(df)
+     # return df
      # resulthtml = df.to_html(classes='table1 table', index=False)
-     result = '''
-     <html>
-     <head>
-     <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
-     <meta http-equiv="Pragma" content="no-cache">
-     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-     <meta http-equiv="expires" content="0">
-     <style>
-     </style>
-     </head>
-     <body>
-         '''
-     result += df.render()
-     result += '''
-     </body>
-     </html>
-     '''
+     json_records = df.reset_index().to_json(orient='records')
+     data = []
+     data = json.loads(json_records)
+     return data
      # print(df)
      # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
      # print(resulthtml)
 
      # # write html to file
-     if os.path.exists("templates/prediction.html"):
-        os.remove("templates/prediction.html")
-        print("file deleted")
-        time.sleep(5)
-
-     else:
-         print("The file does not exist")
-
-     if os.path.exists("templates/prediction.html"):
-        print("file still exists")
-     else:
-         text_file = open("templates/prediction.html", "w")
-         text_file.write(result)
-         print(result)
-         print("file success written")
-         text_file.close()
-
-     # text_file.truncate(0)
-     # time.sleep(2)
+     # if os.path.exists("templates/prediction.html"):
+     #    os.remove("templates/prediction.html")
+     #    print("file deleted")
+     #    cache.clear()
+     #    # time.sleep(5)
+     # else:
+     #     print("The file does not exist")
+     #
+     # if os.path.exists("templates/prediction.html"):
+     #    print("file still exists")
+     # else:
+     #     text_file = open("templates/prediction.html", "w")
+     #     text_file.write(df)
+     #     print("file success written")
+     #     text_file.close()
+         # time.sleep(15)
+         # text_file.truncate(0)
 
 
 # Create your views here.
@@ -166,8 +154,9 @@ def farmeruser(request):
         co=userdata['country']
         st= userdata['state']
         di= userdata['district']
-        search_weather(co,st,di)
-        # time.sleep(5)
+        df=search_weather(co,st,di)
+        userdata['df'] = df
+
         return render(request, "farmer.html", userdata)
 
 
@@ -213,6 +202,7 @@ def fapredict(request):
             st = request.POST['state']
             ci = request.POST['city']
             print(ci)
-            search_weather(co, st, ci)
-            # time.sleep(5)
+            df = search_weather(co, st, ci)
+            userdata['df'] = df
+
         return render(request, "farmer.html",userdata)

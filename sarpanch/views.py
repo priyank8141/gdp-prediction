@@ -14,10 +14,11 @@ def sarpanchuser(request):
         return HttpResponseRedirect('loginuser')
     else:
         userdata = request.session.get('userdata')
-        co=userdata['country']
-        st= userdata['state']
-        di= userdata['district']
-        # search_weather(co,st,di)
+        co = userdata['country']
+        st = userdata['state']
+        di = userdata['district']
+        df = search_weather(co, st, di)
+        userdata['df'] = df
         return render(request, "sarpanch.html", userdata)
 
 
@@ -62,7 +63,8 @@ def sapredict(request):
             co = request.POST['country']
             st = request.POST['state']
             ci = request.POST['city']
-            search_weather(co, st, ci)
+            df = search_weather(co, st, ci)
+            userdata['df'] = df
         return render(request, "sarpanch.html",userdata)
 
 
