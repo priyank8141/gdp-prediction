@@ -2,6 +2,25 @@
 .header{
     background-color:#2e3e4e;
 }
+.headertext{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  flex-flow: column;
+}
+.headerh1{
+  margin-bottom: 0;
+  padding-bottom: 0;
+  display: inline;
+}
+
+.headerp{
+  font-size: 1rem;
+  margin-top: 0;
+  padding-top: 0;
+}
+
 
 .h5-nav{
     color:#fefefe;

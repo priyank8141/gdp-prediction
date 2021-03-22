@@ -38,7 +38,7 @@ def orgprob(request):
         return HttpResponseRedirect('loginuser')
     else:
         userdata = request.session.get('userdata')
-        data = Problem.objects.filter(role='sarpanch')
+        data = Problem.objects.filter(role='sarpanch',status='0')
         userdata['problem'] = data
         return render(request, "orgnoti.html", userdata)
 
@@ -49,11 +49,12 @@ def orgdelete_data(request,id):
         return HttpResponseRedirect('loginuser')
     else:
         userdata = request.session.get('userdata')
-        data = Problem.objects.filter(role='sarpanch')
+        data = Problem.objects.filter(role='sarpanch',status='0')
         userdata['problem'] = data
         if request.method=="POST":
             pi =Problem.objects.get(pk=id)
-            pi.delete()
+            Problem.objects.filter(id=id).update(status="1")
+            # pi.delete()
             return render(request, "orgnoti.html", userdata)
 
 

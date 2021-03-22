@@ -26,7 +26,10 @@
 <nav class="navbar fixed-top navbar-dark navbar-expand-lg static-top header">
     <div class="container">
       <a class="navbar-brand" href="{% url 'profileuser' %}">
-            <h1 class="h5-nav">AEG</h1>
+            <div class="h5-nav headertext">
+                <h1 class="headerh1">AEG</h1>
+                <p class="headerp">Agriculture Economic Growth</p>
+            </div>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,10 +37,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmerreport' %}"><h5 class="h5-nav">Report</h5></a>
+            <a class="nav-link" href="{% url 'farmerreport' %}"><h5 class="h5-nav">Request</h5></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'farmerprofile' %}"><h5 class="h5-nav">{{username}}</h5></a>
+            <a class="nav-link" href="{% url 'farmerprofile' %}"><h5 class="h5-nav">{{username}}, <span>({{von}})</span></h5></a>
           </li>
         </ul>
       </div>
@@ -46,7 +49,7 @@
 
 
 <!--main body-->
-<div class="container" style="margin-top:100px; margin-bottom:50px;">
+<div class="container" style="margin-top:140px; margin-bottom:50px;">
 	<div class="row">
       <div class="col-md-7 col-md-offset-2">
         <div class="well well-sm">

@@ -19,60 +19,60 @@ def search_weather(country,state,city):
      # wheat pred
      def rice(mxt, mit, r, ):
          if mit >= 15 and mxt <= 32 and r <= 1000:
-             return "Safe"
+             return "It's a Great Climate you can"
          else:
              if mit < 15:
-                 return "Temperature will go very low"
+                 return "The temperature will not be suitable. It'll go too low!"
              elif mxt > 32:
-                 return "Temperature will go very high"
+                 return "The temperature will not be suitable. It'll go too High!"
              else:
-                 return "heavy rainfall"
+                 return "It'll be a Heavy Rainfall"
 
      # wheat pred
      def wheat(mxt, mit, r, ):
          if mit >= 2 and mxt <= 35 and r <= 80:
-             return "Safe"
+             return "It's a Great Climate you can"
          else:
              if mit < 2:
-                 return "Temp will go very low"
+                 return "The temperature will not be suitable. It'll go too low!"
              elif mxt > 35:
-                 return "Temp will go very high"
+                 return "The temperature will not be suitable. It'll go too High!"
              else:
-                 return "Heavy Rainfall"
+                 return "It'll be a Heavy Rainfall"
 
      # cotton pred
      def cotton(mxt, mit, r, ):
          if mit >= 10 and mxt <= 35 and r <= 150:
-             return "Safe"
+             return "It's a Great Climate you can"
          else:
              if mit < 10:
-                 return "Temp will go very low"
+                 return "The temperature will not be suitable. It'll go too low!"
              elif mxt > 35:
-                 return "Temp will go very high"
+                 return "The temperature will not be suitable. It'll go too High!"
              else:
-                 return "Heavy Rainfall"
+                 return "It'll be a Heavy Rainfall"
 
      # jute pred
      def jute(mxt, r, ):
          if r <= 250 and mxt >= 25:
-             return "Safe"
+             return "It's a Great Climate you can"
          else:
              if mxt < 25:
-                 return "Temp will go very low"
+                 return "The temperature will not be suitable. It'll go too low!"
              else:
-                 return "Heavy Rainfall"
+                 return "It'll be a Heavy Rainfall"
 
      # cotton pred
      def tea(mxt, mit, r, ):
          if mit >= 20 and mxt <= 32 and r <= 300:
-             return "Safe"
+             return "It's a Great Climate you can"
          else:
              if mit < 20:
-                 return "Temp will go very low"
+                 return "The temperature will not be suitable. It'll go too low!"
              elif mxt > 32:
-                 return "Temp will go very high"
+                 return "The temperature will not be suitable. It'll go too High!"
              else:
-                 return "Heavy Rainfall"
+                 return "It'll be a Heavy Rainfall"
 
      df['Rice'] = df.apply(lambda row: rice(row['max_temp_C'],
                                             row['min_temp C'], row['Rain cm']), axis=1)
@@ -119,6 +119,7 @@ def search_weather(country,state,city):
      json_records = df.reset_index().to_json(orient='records')
      data = []
      data = json.loads(json_records)
+     print(df)
      return data
      # print(df)
      # resulthtml.replace('<tr>', '<tr style="text-align: center;">')
@@ -154,9 +155,9 @@ def farmeruser(request):
         co=userdata['country']
         st= userdata['state']
         di= userdata['district']
+        print(di)
         df=search_weather(co,st,di)
         userdata['df'] = df
-
         return render(request, "farmer.html", userdata)
 
 

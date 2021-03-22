@@ -76,7 +76,7 @@ def sarpanchprob(request):
         userdata = request.session.get('userdata')
         city = userdata['district']
         print(city)
-        data = Problem.objects.filter(role='farmer', district=city)
+        data = Problem.objects.filter(role='farmer', district=city,status='0')
         userdata['problem'] = data
         return render(request, "notification.html", userdata)
 
@@ -87,9 +87,10 @@ def sardelete_data(request,id):
         return HttpResponseRedirect('loginuser')
     else:
         userdata = request.session.get('userdata')
-        data = Problem.objects.filter(role='farmer')
+        data = Problem.objects.filter(role='farmer',status='0')
         userdata['problem'] = data
         if request.method=="POST":
             pi =Problem.objects.get(pk=id)
-            pi.delete()
+            Problem.objects.filter(id=id).update(status="1")
+            # pi.delete()
             return render(request, "notification.html", userdata)

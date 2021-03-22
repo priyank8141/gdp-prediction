@@ -13,3 +13,4 @@ class Problem(models.Model):
     district = models.CharField(max_length=100)
     subject = models.CharField(max_length=150)
     detailproblem = models.CharField(max_length=1000)
+    status = models.CharField(max_length=100,default=0)
